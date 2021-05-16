@@ -180,7 +180,7 @@ namespace CourseWork
             this.groupBox_pidbir.Controls.Add(this.label4);
             this.groupBox_pidbir.Controls.Add(this.numericUpDown_size_bidbir);
             this.groupBox_pidbir.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_pidbir.Location = new System.Drawing.Point(496, 125);
+            this.groupBox_pidbir.Location = new System.Drawing.Point(496, 113);
             this.groupBox_pidbir.Name = "groupBox_pidbir";
             this.groupBox_pidbir.Size = new System.Drawing.Size(322, 340);
             this.groupBox_pidbir.TabIndex = 3;
@@ -258,7 +258,6 @@ namespace CourseWork
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Вікова категорія";
-            this.groupBox4.Visible = false;
             // 
             // radioButton_old
             // 
@@ -269,6 +268,7 @@ namespace CourseWork
             this.radioButton_old.TabIndex = 9;
             this.radioButton_old.Text = "доросла";
             this.radioButton_old.UseVisualStyleBackColor = true;
+            this.radioButton_old.CheckedChanged += new System.EventHandler(this.radioButton_old_CheckedChanged);
             // 
             // radioButton_child
             // 
@@ -376,13 +376,24 @@ namespace CourseWork
             // 
             this.numericUpDown_size_bidbir.Location = new System.Drawing.Point(100, 246);
             this.numericUpDown_size_bidbir.Maximum = new decimal(new int[] {
-            50,
+            45,
+            0,
+            0,
+            0});
+            this.numericUpDown_size_bidbir.Minimum = new decimal(new int[] {
+            24,
             0,
             0,
             0});
             this.numericUpDown_size_bidbir.Name = "numericUpDown_size_bidbir";
             this.numericUpDown_size_bidbir.Size = new System.Drawing.Size(136, 29);
             this.numericUpDown_size_bidbir.TabIndex = 3;
+            this.numericUpDown_size_bidbir.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.numericUpDown_size_bidbir.ValueChanged += new System.EventHandler(this.numericUpDown_size_bidbir_ValueChanged);
             // 
             // label_shoeses_in_list
             // 
@@ -656,7 +667,7 @@ namespace CourseWork
             this.pictureBox1.InitialImage = global::CourseWork.Properties.Resources.add;
             this.pictureBox1.Location = new System.Drawing.Point(13, 258);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(103, 82);
+            this.pictureBox1.Size = new System.Drawing.Size(230, 170);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;

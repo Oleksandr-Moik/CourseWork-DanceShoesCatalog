@@ -266,10 +266,10 @@ namespace CourseWork
                     : Shoes.GenderEnum.GIRLS;
             }
 
-            shoes.Dance = comboBox_dance_pidbir.Text;
-            shoes.Manufacturer = comboBox_manufacturer_pidbir.Text;
-            shoes.Color = comboBox_color_pidbir.Text;
-            shoes.Matherial = comboBox_matherial_pidbir.Text;
+            shoes.Dance = comboBox_dance_pidbir.Text.ToLower().Trim();
+            shoes.Manufacturer = comboBox_manufacturer_pidbir.Text.ToLower().Trim();
+            shoes.Color = comboBox_color_pidbir.Text.ToLower().Trim();
+            shoes.Matherial = comboBox_matherial_pidbir.Text.ToLower().Trim();
 
             shoes.Size = (int)numericUpDown_size.Value;
 
@@ -280,10 +280,17 @@ namespace CourseWork
                 // якщо не співпадає - пропускаємо та переходимо до наступного елементу
                 if ( shoes.Gender != sh.Gender) { continue; }
 
-                if ( !shoes.Dance.ToLower().Contains(sh.Dance.ToLower())) { continue; }
-                if ( !shoes.Manufacturer.ToLower().Contains(sh.Manufacturer.ToLower())) { continue; }
-                if ( !shoes.Color.ToLower().Contains(sh.Color.ToLower())) { }
-                if ( !shoes.Matherial.ToLower().Contains(sh.Matherial.ToLower())) { }
+                if (!(shoes.Dance.Contains(sh.Dance.ToLower())
+                    || sh.Dance.ToLower().Contains(shoes.Dance))) { continue; }
+                
+                if (!(shoes.Manufacturer.Contains(sh.Manufacturer.ToLower())
+                    || sh.Manufacturer.ToLower().Contains(shoes.Manufacturer))) { continue; }
+              
+                if (!(shoes.Color.Contains(sh.Color.ToLower())
+                    || sh.Color.ToLower().Contains(shoes.Color))) { }
+                
+                if (!(shoes.Matherial.Contains(sh.Matherial.ToLower())
+                    || sh.Matherial.ToLower().Contains(shoes.Matherial))) { }
 
                 if (Math.Abs(sh.Size - shoes.Size) > 2) { continue; }
 
@@ -297,14 +304,14 @@ namespace CourseWork
         private void btn_pidbir_Click(object sender, EventArgs e)
         {
             loadListToComboBox(dances, comboBox_dance_pidbir);
-            loadListToComboBox(colors, comboBox_matherial_pidbir);
-            loadListToComboBox(matherials, comboBox_color_pidbir);
+            loadListToComboBox(colors, comboBox_color_pidbir);
+            loadListToComboBox(matherials, comboBox_matherial_pidbir);
             loadListToComboBox(manufacturers, comboBox_manufacturer_pidbir);
 
             loadListToComboBox(shoesService.getDances(), comboBox_dance_pidbir, true);
-            loadListToComboBox(shoesService.getColors(), comboBox_dance_pidbir, true);
-            loadListToComboBox(shoesService.getMatherials(), comboBox_dance_pidbir, true);
-            loadListToComboBox(shoesService.getManufacturers(), comboBox_dance_pidbir, true);
+            loadListToComboBox(shoesService.getColors(), comboBox_color_pidbir, true);
+            loadListToComboBox(shoesService.getMatherials(), comboBox_matherial_pidbir, true);
+            loadListToComboBox(shoesService.getManufacturers(), comboBox_manufacturer_pidbir, true);
 
             groupBox_pidbir.Visible = true;
             groupBox_form.Visible = false;
@@ -341,17 +348,17 @@ namespace CourseWork
             {
                 comboBox_filter_field.Text = "";
             }
+            else
+            {
+                loadListToComboBox(ShoesService.filter_names, comboBox_filter_by);
+                comboBox_filter_by.SelectedIndex = 0;
+            }
 
             DisplayListFromService();
         }
 
         private void comboBox_filter_by_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!checkBox_filter.Checked) return;
-
-            loadListToComboBox(ShoesService.filter_names, comboBox_filter_by);
-            comboBox_filter_by.SelectedIndex = 0;
-
             int index = comboBox_filter_by.SelectedIndex;
             ShoesService.Filters filter = shoesService.getFilterByIndex(index);
             shoesService.setFilter(filter);
@@ -475,8 +482,17 @@ namespace CourseWork
 
             DisplayList(shoeses);
         }
-        
-        #endregion 
-        
+
+        #endregion
+
+        private void numericUpDown_size_bidbir_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton_old_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
